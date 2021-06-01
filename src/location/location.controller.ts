@@ -1,3 +1,4 @@
+import { CreateLocationDto, UpdateLocationDto } from './location.dto';
 import { LocationService } from './location.service';
 import {
   Controller,
@@ -24,7 +25,7 @@ export class LocationController {
   }
 
   @Post()
-  async addLocation(@Body() locationDTO): Promise<any> {
+  async addLocation(@Body() locationDTO: CreateLocationDto): Promise<any> {
     return this.locationService.addLocation(locationDTO);
   }
 
@@ -36,7 +37,7 @@ export class LocationController {
   @Patch('/:id')
   async editLocation(
     @Param('id') id: number,
-    @Body() locationDTO,
+    @Body() locationDTO: UpdateLocationDto,
   ): Promise<any> {
     return this.locationService.editLocation(id, locationDTO);
   }
