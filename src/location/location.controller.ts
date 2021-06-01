@@ -15,22 +15,22 @@ export class LocationController {
 
   @Get()
   async findAll(): Promise<any> {
-    return 'Hello';
+    return this.locationService.findAll();
   }
 
   @Get('/:id')
   async getOneLocation(@Param('id') id: number): Promise<any> {
-    return id;
+    return this.locationService.getOneLocation(id);
   }
 
   @Post()
   async addLocation(@Body() locationDTO): Promise<any> {
-    return 'created location';
+    return this.locationService.addLocation(locationDTO);
   }
 
   @Post('/distance')
   async calculateDistance(@Body() locationDTO): Promise<any> {
-    return 'created location';
+    return this.locationService.calculateDistance(locationDTO);
   }
 
   @Patch('/:id')
@@ -38,11 +38,11 @@ export class LocationController {
     @Param('id') id: number,
     @Body() locationDTO,
   ): Promise<any> {
-    return 'Location edited';
+    return this.locationService.editLocation(id, locationDTO);
   }
 
   @Delete('/:id')
   async deleteLocation(@Param('id') id: number) {
-    return 'Location deleted';
+    return this.locationService.deleteLocation(id);
   }
 }
