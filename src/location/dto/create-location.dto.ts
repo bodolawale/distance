@@ -1,6 +1,3 @@
-import { Location } from './../location.entity';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { CoordinateDto } from './coordinate.dto';
 import {
   IsEmail,
@@ -14,14 +11,9 @@ import { Type } from 'class-transformer';
 import { IsUniqueLocation } from '../location.validation';
 
 export class CreateLocationDto {
-  constructor(
-    @InjectRepository(Location)
-    private locationRepository: Repository<Location>,
-  ) {}
-
   @IsNotEmpty()
   @IsString()
-  @IsUniqueLocation()
+  // @IsUniqueLocation()
   name: string;
 
   @IsNotEmpty()
