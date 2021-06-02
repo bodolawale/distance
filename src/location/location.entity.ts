@@ -13,10 +13,10 @@ export class Coordinate {
   id: number;
 
   @Column()
-  lon: string;
+  lon: number;
 
   @Column()
-  lat: string;
+  lat: number;
 }
 
 @Entity()
@@ -36,7 +36,12 @@ export class Location {
   @Column()
   contactPerson: string;
 
-  @OneToOne(() => Coordinate, { eager: true, onDelete: 'CASCADE' })
+  @OneToOne(() => Coordinate, {
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE',
+    cascade: true,
+    eager: true,
+  })
   @JoinColumn()
   coordinate: Coordinate;
 

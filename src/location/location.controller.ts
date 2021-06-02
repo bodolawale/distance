@@ -1,4 +1,3 @@
-import { FindOneParams as SingleIdParams } from './dto/params.dto';
 import { LocationService } from './location.service';
 import { CreateLocationDto } from './dto/create-location.dto';
 import { UpdateLocationDto } from './dto/update-location.dto';
@@ -7,7 +6,7 @@ import {
   Controller,
   Get,
   Post,
-  Patch,
+  Put,
   Delete,
   Body,
   Param,
@@ -22,9 +21,9 @@ export class LocationController {
     return this.locationService.findAll();
   }
 
-  @Get('/:id')
-  async getOneLocation(@Param() params: SingleIdParams): Promise<any> {
-    return this.locationService.getOneLocation(params.id);
+  @Get('/:name')
+  async getOneLocation(@Param('name') name: string): Promise<any> {
+    return this.locationService.getOneLocation(name);
   }
 
   @Post()
@@ -36,19 +35,17 @@ export class LocationController {
   async calculateDistance(
     @Body() locationDTO: CalculateDistanceDto,
   ): Promise<any> {
-    return this.locationService.calculateDistance(locationDTO);
+    const distance = await this.locationService.calculateDistance(locationDTO);
+    return { distance };
   }
 
-  @Patch('/:id')
-  async editLocation(
-    @Param() params: SingleIdParams,
-    @Body() locationDTO: UpdateLocationDto,
-  ): Promise<any> {
-    return this.locationService.editLocation(params.id, locationDTO);
+  @Put('')
+  async editLocation(@Body() locationDTO: UpdateLocationDto): Promise<any> {
+    return this.locationService.editLocation(locationDTO);
   }
 
-  @Delete('/:id')
-  async deleteLocation(@Param() params: SingleIdParams) {
-    return this.locationService.deleteLocation(params.id);
+  @Delete('/:name')
+  async deleteLocation(@Param('name') name: string) {
+    return this.locationService.deleteLocation(name);
   }
 }

@@ -12,27 +12,27 @@ import { Type } from 'class-transformer';
 export class CreateLocationDto {
   @IsNotEmpty()
   @IsString()
-  readonly name: string;
+  name: string;
 
   @IsNotEmpty()
   @IsString()
-  readonly phone: string;
+  phone: string;
 
   @IsNotEmpty()
   @IsUrl()
-  readonly website?: string;
+  website?: string;
 
   @IsNotEmpty()
   @IsString()
-  readonly description: string;
+  description: string;
 
   @IsNotEmpty()
   @IsEmail()
-  readonly contactPerson: string;
+  contactPerson: string;
 
   @IsNotEmpty()
   @IsObject()
   @ValidateNested()
   @Type(() => CoordinateDto)
-  readonly coordinates: CoordinateDto;
+  coordinate: CoordinateDto;
 }

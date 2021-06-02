@@ -1,7 +1,9 @@
-import { IsNumber } from 'class-validator';
+import { IsString, IsNotEmpty } from 'class-validator';
 export class CalculateDistanceDto {
-  @IsNumber()
-  location1: number;
-  @IsNumber()
-  location2: number;
+  @IsString()
+  @IsNotEmpty()
+  location1: string;
+  @IsString()
+  @IsNotEmpty()
+  location2: string;
 }
