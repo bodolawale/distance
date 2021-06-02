@@ -18,7 +18,6 @@ export class LocationValidator implements ValidatorConstraintInterface {
   ) {}
 
   async validate(name: string) {
-    console.log(this.locationRepository);
     const location = await this.locationRepository.findOne({ name });
     if (location) return false;
     return true;

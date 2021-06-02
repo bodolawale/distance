@@ -47,6 +47,7 @@ Postgres
 
 ## Stuff I did not finish
 
+/_ FIXED _/
 Custom validators for create-location.dto.ts. I could not get the validator to inject the locationRepository
 
 PATCH on the edit endpoint, I used a PUT instead. (onDelete and onUpdate were not cascading)

@@ -13,7 +13,7 @@ import { IsUniqueLocation } from '../location.validation';
 export class CreateLocationDto {
   @IsNotEmpty()
   @IsString()
-  // @IsUniqueLocation()
+  @IsUniqueLocation()
   name: string;
 
   @IsNotEmpty()
