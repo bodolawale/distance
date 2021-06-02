@@ -1,10 +1,18 @@
+import { Repository } from 'typeorm';
+import { Injectable } from '@nestjs/common';
+import { Location } from './location.entity';
+import { InjectRepository } from '@nestjs/typeorm';
 import { CreateLocationDto } from './dto/create-location.dto';
 import { UpdateLocationDto } from './dto/update-location.dto';
 import { CalculateDistanceDto } from './dto/calculate-distance.dto';
-import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class LocationService {
+  constructor(
+    @InjectRepository(Location)
+    private locationRepository: Repository<Location>,
+  ) {}
+
   async findAll(): Promise<any> {
     return 'Hello';
   }

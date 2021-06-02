@@ -1,13 +1,23 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { LocationController } from './location/location.controller';
-import { LocationService } from './location/location.service';
+import { ConfigModule } from '@nestjs/config';
+import { getConnectionOptions } from 'typeorm';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { AppController } from './app.controller';
+import { LocationModule } from './location/location.module';
 
 @Module({
-  imports: [ConfigModule.forRoot()],
-  controllers: [AppController, LocationController],
-  providers: [AppService, LocationService],
+  imports: [
+    ConfigModule.forRoot(),
+    TypeOrmModule.forRootAsync({
+      useFactory: async () =>
+        Object.assign(await getConnectionOptions(), {
+          autoLoadEntities: true,
+        }),
+    }),
+    LocationModule,
+  ],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
