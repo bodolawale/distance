@@ -1,8 +1,6 @@
-import {
-  CreateLocationDto,
-  UpdateLocationDto,
-  calculateDistanceDto,
-} from './location.dto';
+import { CreateLocationDto } from './dto/create-location.dto';
+import { UpdateLocationDto } from './dto/update-location.dto';
+import { CalculateDistanceDto } from './dto/calculate-distance.dto';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -19,7 +17,7 @@ export class LocationService {
     return 'created location';
   }
 
-  async calculateDistance(locationDTO: calculateDistanceDto): Promise<any> {
+  async calculateDistance(locationDTO: CalculateDistanceDto): Promise<any> {
     return 'created location';
   }
 
