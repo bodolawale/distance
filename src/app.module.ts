@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
-import { getConnectionOptions } from 'typeorm';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
+import { Connection, getConnectionOptions } from 'typeorm';
 import { LocationModule } from './location/location.module';
 
 @Module({
@@ -20,4 +20,6 @@ import { LocationModule } from './location/location.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private connection: Connection) {}
+}

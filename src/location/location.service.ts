@@ -1,10 +1,10 @@
 import { Repository } from 'typeorm';
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Location } from './location.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateLocationDto } from './dto/create-location.dto';
 import { UpdateLocationDto } from './dto/update-location.dto';
 import { CalculateDistanceDto } from './dto/calculate-distance.dto';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 
 @Injectable()
 export class LocationService {
@@ -14,6 +14,7 @@ export class LocationService {
   ) {}
 
   async findAll(): Promise<Location[]> {
+    console.log(this.locationRepository);
     return this.locationRepository.find({});
   }
 
@@ -25,8 +26,16 @@ export class LocationService {
   }
 
   async addLocation(locationDTO: CreateLocationDto): Promise<Location> {
-    const location = this.locationRepository.create(locationDTO);
+    const exists = await this.locationRepository.findOne({
+      name: locationDTO.name,
+    });
+    if (exists)
+      throw new HttpException(
+        'Location name already in use',
+        HttpStatus.BAD_REQUEST,
+      );
 
+    const location = this.locationRepository.create(locationDTO);
     return this.locationRepository.save(location);
   }
 
